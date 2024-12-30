@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 [v5]</title>
+
+    <!-- Block format in the browser-->
+
+    <style>
+        #updatedGrid {
+            font-family: monospace;
+            white-space: pre;
+            /* Preserve whitespace and newlines */
+            border: 1px solid #ddd;
+            display: inline-block;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h3>Welcome to My 2048 Page!</h3>
+
+    <!-- This paragraph is needed for displaying errors -->
+    <p id="error"></p>
+
+    <!-- This is the game grid -->
+    <div>
+        <p id="row_0"></p>
+        <p id="row_1"></p>
+        <p id="row_2"></p>
+        <p id="row_3"></p>
+    </div>
+
+    <p id="endGame"></p>
+
+    <!-- Link to your JavaScript file -->
+    <script src="createTask5.js"></script>
+</body>
+
+</html>
