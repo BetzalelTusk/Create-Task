@@ -15,7 +15,6 @@ var isGameOver = false
     move(dir);
     console.log(grid);  
 
-
 function move(dir){
     if (dir === "right") {
         for (i = 0; i < grid.length; i++) {
