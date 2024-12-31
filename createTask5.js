@@ -39,6 +39,8 @@ function getMoveFromUser() {
 	if (possibleMoves.includes(userInput) === false) {
 		// the user gave invalid input. This is an error.
 		throw new Error('YOU MUST CHOOSE BETTER');
+	}else if(possibleMoves.includes(userInput === true){
+		// the program will move in the user input direction
 	}
 
 	return userInput;
