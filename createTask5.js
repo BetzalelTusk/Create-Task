@@ -40,23 +40,27 @@ function getMoveFromUser() {
 	if (possibleMoves.includes(userInput) === false) {
 		// the user gave invalid input. This is an error.
 		throw new Error('YOU MUST CHOOSE BETTER');
-	}else if(possibleMoves.includes(userInput === true)){
-		// the program will move in the user input direction
-		userMove(dir);
+		}
 	}
 
 	return userInput;
 }
 
-function userMoveRight(dir){
+function userMoveRight(){
 	//will be the brains of the right move and the down move after we transpose
+	zeroSwapOnRight(i, j);
+	mergeRight(i, j);
+	zeroSwapOnRight(i, j);
 }
-function userMoveLeft(dir){
+function userMoveLeft(){
 	//will be the brains of the left move and the up move after we transpose
+	zeroSwapOnLeft(i, j);
+	mergeLeft(i, j);
+	zerSwapOnLeft(i, j);
 }
 
 //this will only work for userMoveRight
-function zeroSwapRight(i, j) {
+function zeroSwapOnRight(i, j) {
 // Keep moving non-zero value to the right as long as there's a zero to its right
 	while (j + 1 < grid[i].length && grid[i][j + 1] === 0) {
 // Swap the current value with the next zero cell
@@ -67,13 +71,33 @@ function zeroSwapRight(i, j) {
 	}
 }
 
-function zeroSwapLeft(i, j){
+function zeroSwapOnLeft(i, j){
 	while (j - 1 > -1 && grid[i][j - 1] === 0) {
 		let temp = grid[i][j];
 		grid[i][j] = grid[i][j - 1];
 		grid[i][j - 1] = temp;
 		j--; // Move to the next position to check again
 	}
+}
+
+function mergeRight(i, j) {
+	// Check if the next cell is the same and not already merged
+	if (j + 1 < grid[i].length && grid[i][j] === grid[i][j + 1] && grid[i][j] !== 0) {
+		grid[i][j + 1] = grid[i][j] + grid[i][j]; // Merge the values
+		grid[i][j] = 0; // Clear the original cell
+		zeroSwapOnRight(i, j); // Ensure the tiles are in the correct positions after merging
+	}
+}
+
+function mergeLeft(i, j){
+	//Check is the next cell is the same and not already nmerged
+	if(j - 1 >= 0 && grid[i][j] === grid[i][j -1] && grid[i][j] !== 0){
+		grid[i][j -1] = grid[i][j] + grid[i][j]; // Merge the values
+		grid[i][j] = 0 // Clear the original cell
+		zeroSwapOnRight(i, j); // Ensure the tiles are in the correct positions after merging
+	}
+}
+
 
 
 
