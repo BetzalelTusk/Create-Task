@@ -48,6 +48,35 @@ function getMoveFromUser() {
 	return userInput;
 }
 
-function userMove(dir){
-	
+function userMoveRight(dir){
+	//will be the brains of the right move and the down move after we transpose
 }
+function userMoveLeft(dir){
+	//will be the brains of the left move and the up move after we transpose
+}
+
+//this will only work for userMoveRight
+function zeroSwapRight(i, j) {
+// Keep moving non-zero value to the right as long as there's a zero to its right
+	while (j + 1 < grid[i].length && grid[i][j + 1] === 0) {
+// Swap the current value with the next zero cell
+		let temp = grid[i][j];
+		grid[i][j] = grid[i][j + 1];
+		grid[i][j + 1] = temp;
+		j++; // Move to the next position to check again
+	}
+}
+
+function zeroSwapLeft(i, j){
+	while (j - 1 > -1 && grid[i][j - 1] === 0) {
+		let temp = grid[i][j];
+		grid[i][j] = grid[i][j - 1];
+		grid[i][j - 1] = temp;
+		j--; // Move to the next position to check again
+	}
+
+
+
+
+
+
