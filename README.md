@@ -43,6 +43,7 @@ Hey kiddo! I added a few things to this repository to make your life easier as y
 
 3. **Fixing Errors**
    - After setting everything up, you’ll likely see a lot of errors being highlighted. o0oOOo°oOo00°o scary 👻
+   - These errors were already present in the code but weren't being flagged before because we didn't have `eslint` and `prettier` set up.
    - Work through them one step at a time, starting with the first error, as fixing it might resolve others.
    - If you get stuck, don’t hesitate to ask for help.
 
