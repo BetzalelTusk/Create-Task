@@ -1,3 +1,5 @@
+// CR: Code review comments are marked with "CR:"
+
 // const BOARD = [];
 const BOARD = [
   [0, 0, 0, 2],
@@ -138,9 +140,9 @@ function mergeRight(i, j) {
    * comments to explain what each part of the line is doing.
    */
   if (
-    j + 1 < grid[i].length &&
-    grid[i][j] === grid[i][j + 1] &&
-    grid[i][j] !== 0
+    j + 1 < grid[i].length && // CR: sample comment // Check if the right neighbor exists
+    grid[i][j] === grid[i][j + 1] && // CR: sample comment // Check if the values are the same
+    grid[i][j] !== 0 // CR: sample comment // Check if the current cell is not zero
   ) {
     grid[i][j + 1] = grid[i][j] + grid[i][j]; // Merge the values
     grid[i][j] = 0; // Clear the original cell
@@ -165,7 +167,6 @@ function mergeLeft(i, j) {
 // CR: in multiple places, you should consider refactoring it into a single function that can be reused.
 // CR: This makes your code easier to maintain and less error-prone.
 // CR: Violations of good coding practices are often referred to as "code smells".
-// CR: And this is some
 
 // ---- End of Code Review ----
 
@@ -173,19 +174,21 @@ function mergeLeft(i, j) {
  * Here's a list of some that I use, specifically for JavaScript:
  *
  * - ESLint: This will help you catch errors and enforce coding standards.
- *           I already set up the configuration for you in the eslint.config.mjs file.
- * 		     You can install it by searching for "ESLint" in the Extensions tab.
+ *    I already set up the configuration for you in the eslint.config.mjs file.
+ *    You can install it by searching for "ESLint" in the Extensions tab.
  *
  * - Prettier: This will help you format your code automatically.
- *             I also set up the configuration for you in the .prettierrc file.
+ *    I also set up the configuration for you in the .prettierrc file.
  *
  * - Error Lens: This will highlight errors and warnings in your code very clearly.
+ *    It's very useful to get a quick overview of what's wrong.
  *
  * - IntelliCode: This will help you write code faster by suggesting relevant completions.
- * 				  It's smart autocomplete.
+ *    It can also suggest what properties or methods you might want to use.
+ *    For example, if you type MOVES., it will suggest UP, DOWN, RIGHT, and LEFT.
+ *    It will save you a lot of time and help you avoid typos.
  *
  * - Auto Rename Tag: This will automatically rename matching tags in HTML.
- *
- *
+ *    It's very useful when you're working with HTML, but not relevant for JavaScript.
  *
  */

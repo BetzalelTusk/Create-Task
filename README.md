@@ -46,8 +46,22 @@ Hey kiddo! I added a few things to this repository to make your life easier as y
    - Work through them one step at a time, starting with the first error, as fixing it might resolve others.
    - If you get stuck, don’t hesitate to ask for help.
 
-## Final Thoughts
 
-Take your time, and don’t worry if things feel overwhelming at first. Programming is a skill you build step by step, and setting up a project like this is a great way to learn. You've got this! 🚀
+Take your time, and don’t freak out if things feel overwhelming at first. Programming is a skill you build by practice, and setting up a project like this is a great way to learn. You've got this! 🚀
 
 Good luck with the project, and let me know if you need help!
+
+
+P.S., when you're making commits, be sure to write clear and concise messages. It's a good habit to get into, and it'll help you and others understand the changes you've made.
+
+Also, break down the commits into smaller, logical changes. It makes it easier to track progress and understand the changes made in each commit.
+
+For example, instead of writing a single commit message like "Updated the createTask5.js file," you could break it down into multiple commits like:
+- Added function to reset the game board
+- Fixed bug in the checkWinner function
+- Updated the game logic to handle ties
+- Refactored the code to improve readability
+- Implemented a feature to display the current player
+- etc.
+
+This is especially helpful when you need to revert changes or track down bugs.
