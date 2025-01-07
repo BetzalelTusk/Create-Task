@@ -27,7 +27,7 @@ function initBoard() {
       }
     }
   }
-console.log(BOARD);
+initBoard();
 function getMoveFromUser() {
   try {
     const userInput = prompt("Which direction would you like to go in? right, left, up, or down?");
