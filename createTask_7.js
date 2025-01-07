@@ -15,8 +15,11 @@ const MOVES = {
  */
 function initBoard() {
   for (let i = 0; i < DIMENSION; i++) {
-    if (BOARD[i] !== undefined) BOARD[i] = [];
-    else BOARD.push([]); // Into the 2nd dimension!!
+    if (BOARD[i] !== undefined) {
+      BOARD[i] = [];
+    } else {
+      BOARD.push([]); // Into the 2nd dimension!!
+    }
     for (let j = 0; j < DIMENSION; j++) {
       BOARD[i].push(0);
     }
@@ -104,7 +107,9 @@ function zeroSwap(i, j, userInput) {
 function merge(i, j, userInput) {
   //we must convert up and down to right and left, because at the end of the day up and down are just right and left but transposed.
   if (userInput === MOVES.RIGHT) {
+    // j + 1 will = j * 2, and j becomes 0. dont forget to move this zero to the left after the merge occurs.
   } else if (userInput === MOVES.LEFT) {
+    // j + 1 will = j * 2, and j becomes 0. dont forget to move this zero to the left after the merge occurs.
   } else if (userInput === MOVES.UP) {
     //uses LEFT logic + transpose
   } else if (userInput === MOVES.DOWN) {
