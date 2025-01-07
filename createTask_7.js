@@ -103,3 +103,10 @@ function updateHTML(){
   document.getElementById("row_2").innerHTML = BOARD[2];
   document.getElementById("row_3").innerHTML = BOARD[3];
 }
+
+/* 
+Do keep in mind, that I am coding with the information that I am familiar with.
+ While I am eager to learn more, I don't beleive that the way to learn more is by making my code more complicated and adapting to it.
+ I will watch youtube videos and learn as much as I can, but while I am working on this project, I am going to keep things as simple as I can.
+ Thank you so much for all your help, i really appreciate it :)
+*/
