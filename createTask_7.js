@@ -27,39 +27,55 @@ function initBoard() {
       }
     }
   }
+console.log(BOARD);
+function getMoveFromUser() {
+  try {
+    const userInput = prompt("Which direction would you like to go in? right, left, up, or down?");
+    if (userInput === null || userInput.trim() === "") {
+      throw new Error("YOU MUST INPUT CORRECTLY OR DIE");
+    }
+    
+    const possibleMoves = Object.values(MOVES); // Valid moves: up, down, left, right
 
-function getMoveFromUser(){
-  
-  const userInput = prompt("Which direction would you like to gon in? right, left, up, or down?");
-  let direction = userInput;
-  if(userInput === null){ //If the user did not put anything into the prompt:
-    throw new Error("YOU MUST INPUT CORRECTLY OR DIE")
+    if (!possibleMoves.includes(userInput)) {
+      throw new Error("YOU MUST CHOOSE BETTER OR DIE");
+    }
+
+    return userInput; // Return validated input
+  } catch (error) {
+    document.getElementById("error").textContent = error.message;
+    return null; // Return null if there's an error
   }
-  
-  const possibleMoves = Object.values(MOVES); //This will be plugged into the move function later
-
-  //If the input is not included in MOVES: Throw error
-  if (possibleMoves.includes(userInput) === flase){
-    throw new Error("YOU MUST CHOSE BETTER OR DIE");
-  }
-
-  return userInput;
 }
 
-if(possibleMoves.includes(direction) === true){
-  userMove(direction)
+// Main Game Logic
+const userInput = getMoveFromUser();
+if (userInput) { // Ensure valid input was provided
+  userMove(userInput); // Use the validated input
+  updateHTML(); // Update the UI
 }
 
-function userMove(direction) {
+
+if(possibleMoves.includes(userInput) === true){
+  getMoveFromUser();
+  userMove(userInput);
+  updateHTML();
+}
+
+function userMove(userInput) {
   for (let i = 0; i < DIMENSION; i++) {
-    if (direction === MOVES.RIGHT) {
+    if (userInput === MOVES.RIGHT) {
       for (let j = DIMENSION - 1; j >= 0; j--) { 
         zeroSwap(i, j, RoL.RIGHT);
       }
-    } else if (direction === MOVES.LEFT) {
+    } else if (userInput === MOVES.LEFT) {
       for (let j = 1; j < DIMENSION; j++) { // Start from leftmost non-edge cell
         zeroSwap(i, j, RoL.LEFT);
       }
+    } else if (userInput === MOVES.DOWN) {
+      // Introduce the transpose function and apply right logic
+    } else if (userInput === MOVES.UP) {
+      // Introduce the transpose function and apply left logic
     }
   }
 }
@@ -79,4 +95,11 @@ function zeroSwap(i, j, RoL) {
       j--;
     }
   }
+}
+
+function updateHTML(){
+  document.getElementById("row_0").innerHTML = BOARD[0];
+  document.getElementById("row_1").innerHTML = BOARD[1];
+  document.getElementById("row_2").innerHTML = BOARD[2];
+  document.getElementById("row_3").innerHTML = BOARD[3];
 }
