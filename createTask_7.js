@@ -9,7 +9,8 @@ const MOVES = {
   LEFT: "left",
 };
 
-const RoL = { //Right or Left
+const RoL = {
+  //Right or Left
   RIGHT: "right",
   LEFT: "left",
 };
@@ -19,22 +20,24 @@ const RoL = { //Right or Left
  * It is not being used anywhere at the moment.
  */
 function initBoard() {
-    for (let i = 0; i < DIMENSION; i++) {
-      if (BOARD[i] !== undefined) BOARD[i] = [];
-      else BOARD.push([]); // Into the 2nd dimension!!
-      for (let j = 0; j < DIMENSION; j++) {
-        BOARD[i].push(0);
-      }
+  for (let i = 0; i < DIMENSION; i++) {
+    if (BOARD[i] !== undefined) BOARD[i] = [];
+    else BOARD.push([]); // Into the 2nd dimension!!
+    for (let j = 0; j < DIMENSION; j++) {
+      BOARD[i].push(0);
     }
   }
+}
 initBoard();
 function getMoveFromUser() {
   try {
-    const userInput = prompt("Which direction would you like to go in? right, left, up, or down?");
+    const userInput = prompt(
+      "Which direction would you like to go in? right, left, up, or down?",
+    );
     if (userInput === null || userInput.trim() === "") {
       throw new Error("YOU MUST INPUT CORRECTLY OR DIE");
     }
-    
+
     const possibleMoves = Object.values(MOVES); // Valid moves: up, down, left, right
 
     if (!possibleMoves.includes(userInput)) {
@@ -50,13 +53,13 @@ function getMoveFromUser() {
 
 // Main Game Logic
 const userInput = getMoveFromUser();
-if (userInput) { // Ensure valid input was provided
+if (userInput) {
+  // Ensure valid input was provided
   userMove(userInput); // Use the validated input
   updateHTML(); // Update the UI
 }
 
-
-if(possibleMoves.includes(userInput) === true){
+if (possibleMoves.includes(userInput) === true) {
   getMoveFromUser();
   userMove(userInput);
   updateHTML();
@@ -65,11 +68,12 @@ if(possibleMoves.includes(userInput) === true){
 function userMove(userInput) {
   for (let i = 0; i < DIMENSION; i++) {
     if (userInput === MOVES.RIGHT) {
-      for (let j = DIMENSION - 1; j >= 0; j--) { 
+      for (let j = DIMENSION - 1; j >= 0; j--) {
         zeroSwap(i, j, RoL.RIGHT);
       }
     } else if (userInput === MOVES.LEFT) {
-      for (let j = 1; j < DIMENSION; j++) { // Start from leftmost non-edge cell
+      for (let j = 1; j < DIMENSION; j++) {
+        // Start from leftmost non-edge cell
         zeroSwap(i, j, RoL.LEFT);
       }
     } else if (userInput === MOVES.DOWN) {
@@ -79,7 +83,6 @@ function userMove(userInput) {
     }
   }
 }
-
 
 function zeroSwap(i, j, RoL) {
   if (RoL === RoL.RIGHT) {
@@ -97,13 +100,13 @@ function zeroSwap(i, j, RoL) {
   }
 }
 
-function updateHTML(){
+function updateHTML() {
   document.getElementById("row_0").innerHTML = BOARD[0];
   document.getElementById("row_1").innerHTML = BOARD[1];
   document.getElementById("row_2").innerHTML = BOARD[2];
   document.getElementById("row_3").innerHTML = BOARD[3];
 }
 
-function addTile(){
+function addTile() {
   let randomNum = Math.floor(Math.random() * DIMENSION);
 }
