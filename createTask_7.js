@@ -1,16 +1,10 @@
-const BOARD = [];
+let BOARD = [];
 const DIMENSION = 4; // 4x4 board
 
 const MOVES = {
   // Tzarich Iyun
   UP: "up",
   DOWN: "down",
-  RIGHT: "right",
-  LEFT: "left",
-};
-
-const RoL = {
-  //Right or Left
   RIGHT: "right",
   LEFT: "left",
 };
@@ -57,46 +51,64 @@ if (userInput) {
   // Ensure valid input was provided
   userMove(userInput); // Use the validated input
   updateHTML(); // Update the UI
-}
-
-if (possibleMoves.includes(userInput) === true) {
-  getMoveFromUser();
-  userMove(userInput);
-  updateHTML();
-}
+} // This block was written with  the help of chatGPT ^w^  ...sorry, couldnt help myself.
 
 function userMove(userInput) {
   for (let i = 0; i < DIMENSION; i++) {
     if (userInput === MOVES.RIGHT) {
       for (let j = DIMENSION - 1; j >= 0; j--) {
-        zeroSwap(i, j, RoL.RIGHT);
+        zeroSwap(i, j, userInput);
       }
     } else if (userInput === MOVES.LEFT) {
-      for (let j = 1; j < DIMENSION; j++) {
+      for (let j = 0; j < DIMENSION; j++) {
         // Start from leftmost non-edge cell
-        zeroSwap(i, j, RoL.LEFT);
+        zeroSwap(i, j, userInput);
       }
     } else if (userInput === MOVES.DOWN) {
       // Introduce the transpose function and apply right logic
+      BOARD = transpose(BOARD);
+      for (let j = DIMENSION - 1; j >= 0; j--) {
+        zeroSwap(i, j, userInput);
+        BOARD = transpose(BOARD);
+      }
     } else if (userInput === MOVES.UP) {
       // Introduce the transpose function and apply left logic
+      BOARD = transpose(BOARD);
+      for (let j = 1; j < DIMENSION; j++) {
+        // Start from leftmost non-edge cell
+        zeroSwap(i, j, userInput);
+        BOARD = transpose(BOARD);
+      }
     }
   }
 }
 
-function zeroSwap(i, j, RoL) {
-  if (RoL === RoL.RIGHT) {
+function zeroSwap(i, j, userInput) {
+  if (userInput === MOVES.RIGHT) {
     // Move non-zero value to the right as long as there's a zero to its right
     while (j + 1 < BOARD[i].length && BOARD[i][j + 1] === 0) {
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
       j++;
     }
-  } else if (RoL === RoL.LEFT) {
+  } else if (userInput === MOVES.LEFT) {
     // Move non-zero value to the left as long as there's a zero to its left
-    while (j - 1 >= 0 && BOARD[i][j - 1] === 0) {
-      [BOARD[i][j], BOARD[i][j - 1]] = [BOARD[i][j - 1], BOARD[i][j]];
-      j--;
+    for (let k = 0; k < DIMENSION; k++) {
+      let temp = BOARD[i][j];
+      BOARD[i][j] = BOARD[i][j + 1];
+      BOARD[i][j + 1] = temp;
+      j++; // Move to the next position to check again
     }
+  }
+}
+
+function merge(i, j, userInput) {
+  //we must convert up and down to right and left, because at the end of the day up and down are just right and left but transposed.
+  if (userInput === MOVES.RIGHT) {
+  } else if (userInput === MOVES.LEFT) {
+  } else if (userInput === MOVES.UP) {
+    //uses LEFT logic + transpose
+  } else if (userInput === MOVES.DOWN) {
+    //uses RIGHT logic + transpose
   }
 }
 
@@ -108,5 +120,14 @@ function updateHTML() {
 }
 
 function addTile() {
-  let randomNum = Math.floor(Math.random() * DIMENSION);
+  let randomInsert = Math.floor(Math.random() * DIMENSION); // we need to make sure that this number is only a 2 or 4
+  let randomLocation = Math.floor(Math.random() * DIMENSION);
+  // we have this new let to determine where the "randomInsert" is going to go.
+  //keep in mind that the location that were will be putting the "randomInsert" in MUST be a 0, as a 0 is a placeholder.
+
+  //will work on the location part of the function later.
+}
+
+function transpose(BOARD) {
+  return BOARD[0].map((_, colIndex) => BOARD.map((row) => row[colIndex]));
 }
