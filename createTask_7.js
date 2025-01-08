@@ -58,6 +58,7 @@ if (userInput) {
 
 function userMove(userInput) {
   for (let i = 0; i < DIMENSION; i++) {
+    // To filter through each row - BOARD[i](with an eventual[j])
     if (userInput === MOVES.RIGHT) {
       for (let j = DIMENSION - 1; j >= 0; j--) {
         zeroSwap(i, j, userInput);
@@ -72,32 +73,32 @@ function userMove(userInput) {
       BOARD = transpose(BOARD);
       for (let j = DIMENSION - 1; j >= 0; j--) {
         zeroSwap(i, j, userInput);
-        BOARD = transpose(BOARD);
       }
+      BOARD = transpose(BOARD);
     } else if (userInput === MOVES.UP) {
       // Introduce the transpose function and apply left logic
       BOARD = transpose(BOARD);
       for (let j = 1; j < DIMENSION; j++) {
         // Start from leftmost non-edge cell
         zeroSwap(i, j, userInput);
-        BOARD = transpose(BOARD);
       }
+      BOARD = transpose(BOARD);
     }
   }
 }
 
 function zeroSwap(i, j, userInput) {
-  if (userInput === MOVES.RIGHT) {
+  if (userInput === MOVES.RIGHT || userInput === MOVES.DOWN) {
     // Move non-zero value to the right as long as there's a zero to its right
     while (j + 1 < BOARD[i].length && BOARD[i][j + 1] === 0) {
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
       j++;
     }
-  } else if (userInput === MOVES.LEFT) {
+  } else if (userInput === MOVES.LEFT || userInput === MOVES.UP) {
+    //As it is the same brains for left and up, we make the condition for this statement either left or up
     // Move non-zero value to the left as long as there's a zero to its left
-    // Took the brains from the userInput === MOVES.RIGHT ^. Need to change for left brains
-    // -----> ATTENTION REQUIRED <-----
-    while (j + 1 < BOARD[i].length && BOARD[i][j + 1] === 0) {
+    while (j < BOARD[i].length - 1 && BOARD[i][j] === 0) {
+      //Make sure to look over this while statement. i dont think its the right logic.
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
       j++;
     }
