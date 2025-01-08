@@ -26,6 +26,7 @@ function initBoard() {
   }
 }
 initBoard();
+updateHTML();
 function getMoveFromUser() {
   try {
     const userInput = prompt(
