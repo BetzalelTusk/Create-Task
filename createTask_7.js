@@ -107,13 +107,13 @@ function zeroSwap(i, j, userInput) {
 function merge(i, j, userInput) {
   //we must convert up and down to right and left, because at the end of the day up and down are just right and left but transposed.
   if (userInput === MOVES.RIGHT) {
-    // j + 1 will = j * 2, and j becomes 0. dont forget to move this zero to the left after the merge occurs.
+    // j + 1 will = j * 2, and j becomes 0. Don't forget to move this zero to the left after the merge occurs.
   } else if (userInput === MOVES.LEFT) {
-    // j + 1 will = j * 2, and j becomes 0. dont forget to move this zero to the left after the merge occurs.
+    // j - 1 will = j * 2, and j becomes 0. Don't forget to move this zero to the right after the merge occurs.
   } else if (userInput === MOVES.UP) {
-    //uses LEFT logic + transpose
+    //uses MOVES.LEFT logic + -- DO NOT -- transpose before and after merge as we alerady transpose in userMove() function
   } else if (userInput === MOVES.DOWN) {
-    //uses RIGHT logic + transpose
+    //uses MOVES.RIGHT logic + -- DO NOT -- transpose before and after merge as we alerady transpose in userMove() function
   }
 }
 
