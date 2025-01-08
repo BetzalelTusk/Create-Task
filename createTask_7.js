@@ -95,11 +95,11 @@ function zeroSwap(i, j, userInput) {
     }
   } else if (userInput === MOVES.LEFT) {
     // Move non-zero value to the left as long as there's a zero to its left
-    for (let k = 0; k < DIMENSION; k++) {
-      let temp = BOARD[i][j];
-      BOARD[i][j] = BOARD[i][j + 1];
-      BOARD[i][j + 1] = temp;
-      j++; // Move to the next position to check again
+    // Took the brains from the userInput === MOVES.RIGHT ^. Need to change for left brains
+    // -----> ATTENTION REQUIRED <-----
+    while (j + 1 < BOARD[i].length && BOARD[i][j + 1] === 0) {
+      [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
+      j++;
     }
   }
 }
