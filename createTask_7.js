@@ -9,6 +9,19 @@ const MOVES = {
   LEFT: "left",
 };
 
+initBoard();
+updateHTML();
+
+// Main Game Logic - Where we call the functions
+const userInput = getMoveFromUser();
+if (userInput) {
+  // Ensure valid input was provided
+  userMove(userInput); // Use the validated input
+  updateHTML(); // Update the UI
+} // This block was written with  the help of chatGPT ^w^  ...sorry, couldnt help myself.
+
+//-----------------Functions from here and down-----------------
+
 /**
  * initBoard resets the game board. (fills it with 0's)
  * It is not being used anywhere at the moment.
@@ -25,8 +38,7 @@ function initBoard() {
     }
   }
 }
-initBoard();
-updateHTML();
+
 function getMoveFromUser() {
   try {
     const userInput = prompt(
@@ -48,14 +60,6 @@ function getMoveFromUser() {
     return null; // Return null if there's an error
   }
 }
-
-// Main Game Logic
-const userInput = getMoveFromUser();
-if (userInput) {
-  // Ensure valid input was provided
-  userMove(userInput); // Use the validated input
-  updateHTML(); // Update the UI
-} // This block was written with  the help of chatGPT ^w^  ...sorry, couldnt help myself.
 
 function userMove(userInput) {
   for (let i = 0; i < DIMENSION; i++) {
