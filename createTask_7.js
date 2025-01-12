@@ -10,7 +10,7 @@ const MOVES = {
 };
 
 initBoard();
-
+updateHTML();
 // Main Game Logic - Where we call the functions
 const userInput = getMoveFromUser();
 if (userInput) {
@@ -66,26 +66,34 @@ function userMove(userInput) {
     // To filter through each row - BOARD[i](with an eventual[j])
     if (userInput === MOVES.RIGHT) {
       for (let j = DIMENSION - 1; j >= 0; j--) {
-        zeroSwap(i, j, userInput);
+        for (let l = 0; l < 4; l++) {
+          zeroSwap(i, j, userInput);
+        }
       }
     } else if (userInput === MOVES.LEFT) {
       for (let j = 0; j < DIMENSION; j++) {
         // Start from leftmost non-edge cell
-        zeroSwap(i, j, userInput);
+        for (let l = 0; l < 4; l++) {
+          zeroSwap(i, j, userInput);
+        }
       }
     } else if (userInput === MOVES.DOWN) {
       // Introduce the transpose function and apply right logic
       BOARD = transpose(BOARD);
       for (let j = DIMENSION - 1; j >= 0; j--) {
-        zeroSwap(i, j, userInput);
+        for (let l = 0; l < 4; l++) {
+          zeroSwap(i, j, userInput);
+        }
       }
       BOARD = transpose(BOARD);
     } else if (userInput === MOVES.UP) {
       // Introduce the transpose function and apply left logic
       BOARD = transpose(BOARD);
-      for (let j = 1; j < DIMENSION; j++) {
+      for (let j = 0; j < DIMENSION; j++) {
         // Start from leftmost non-edge cell
-        zeroSwap(i, j, userInput);
+        for (let l = 0; l < 4; l++) {
+          zeroSwap(i, j, userInput);
+        }
       }
       BOARD = transpose(BOARD);
     }
