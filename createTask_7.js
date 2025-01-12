@@ -21,7 +21,7 @@ function initBoard() {
       BOARD.push([]); // Into the 2nd dimension!!
     }
     for (let j = 0; j < DIMENSION; j++) {
-      BOARD[i].push(0);
+      BOARD[i].push(addTile()); // I just put "J + 1 * j" to get a wider range of number. temporary different numbers until i make the insert random tile function complete
     }
   }
 }
@@ -131,8 +131,8 @@ function addTile() {
   let randomLocation = Math.floor(Math.random() * DIMENSION);
   // we have this new let to determine where the "randomInsert" is going to go.
   //keep in mind that the location that were will be putting the "randomInsert" in MUST be a 0, as a 0 is a placeholder.
-
   //will work on the location part of the function later.
+  return randomInsert;
 }
 
 function transpose(BOARD) {
