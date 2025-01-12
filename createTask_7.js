@@ -10,7 +10,6 @@ const MOVES = {
 };
 
 initBoard();
-updateHTML();
 
 // Main Game Logic - Where we call the functions
 const userInput = getMoveFromUser();
@@ -37,6 +36,7 @@ function initBoard() {
       BOARD[i].push(addTile()); // I just put "J + 1 * j" to get a wider range of number. temporary different numbers until i make the insert random tile function complete
     }
   }
+  updateHTML();
 }
 
 function getMoveFromUser() {
