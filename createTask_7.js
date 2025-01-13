@@ -66,14 +66,14 @@ function userMove(userInput) {
     // To filter through each row - BOARD[i](with an eventual[j])
     if (userInput === MOVES.RIGHT) {
       for (let j = DIMENSION - 1; j >= 0; j--) {
-        for (let l = 0; l < 4; l++) {
+        for (let k = 0; k < 4; k++) {
           zeroSwap(i, j, userInput);
         }
       }
     } else if (userInput === MOVES.LEFT) {
       for (let j = 0; j < DIMENSION; j++) {
         // Start from leftmost non-edge cell
-        for (let l = 0; l < 4; l++) {
+        for (let k = 0; k < 4; k++) {
           zeroSwap(i, j, userInput);
         }
       }
@@ -81,7 +81,7 @@ function userMove(userInput) {
       // Introduce the transpose function and apply right logic
       BOARD = transpose(BOARD);
       for (let j = DIMENSION - 1; j >= 0; j--) {
-        for (let l = 0; l < 4; l++) {
+        for (let k = 0; k < 4; k++) {
           zeroSwap(i, j, userInput);
         }
       }
@@ -91,7 +91,7 @@ function userMove(userInput) {
       BOARD = transpose(BOARD);
       for (let j = 0; j < DIMENSION; j++) {
         // Start from leftmost non-edge cell
-        for (let l = 0; l < 4; l++) {
+        for (let k = 0; k < 4; k++) {
           zeroSwap(i, j, userInput);
         }
       }
@@ -103,14 +103,14 @@ function userMove(userInput) {
 function zeroSwap(i, j, userInput) {
   if (userInput === MOVES.RIGHT || userInput === MOVES.DOWN) {
     // Move non-zero value to the right as long as there's a zero to its right
-    while (j + 1 < BOARD[i].length && BOARD[i][j + 1] === 0) {
+    while (j + 1 < DIMENSION && BOARD[i][j + 1] === 0) {
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
       j++;
     }
   } else if (userInput === MOVES.LEFT || userInput === MOVES.UP) {
     //As it is the same brains for left and up, we make the condition for this statement either left or up
     // Move non-zero value to the left as long as there's a zero to its left
-    while (j < BOARD[i].length - 1 && BOARD[i][j] === 0) {
+    while (j < DIMENSION - 1 && BOARD[i][j] === 0) {
       //Make sure to look over this while statement. i dont think its the right logic.
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
       j++;
