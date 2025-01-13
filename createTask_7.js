@@ -100,6 +100,9 @@ function userMove(userInput) {
   }
 }
 
+//  ---------->> Fix bug that requires "K" loop above <<----------
+// -- dont call program finished until figure out what the bug is --
+
 function zeroSwap(i, j, userInput) {
   if (userInput === MOVES.RIGHT || userInput === MOVES.DOWN) {
     // Move non-zero value to the right as long as there's a zero to its right
