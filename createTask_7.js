@@ -20,14 +20,14 @@ const MOVES = {
 initBoard();
 updateHTML();
 // Main Game Logic - Where we call the functions
-while (gameStat === true) {
-  const userInput = getMoveFromUser();
-  if (userInput) {
-    // Ensure valid input was provided
-    userMove(userInput); // Use the validated input
-    updateHTML(); // Update the UI
-  }
+//while (gameStat === true) {
+const userInput = getMoveFromUser();
+if (userInput) {
+  // Ensure valid input was provided
+  userMove(userInput); // Use the validated input
+  updateHTML(); // Update the UI
 }
+//}
 //-----------------Functions from here and down-----------------
 
 /**
