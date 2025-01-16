@@ -36,7 +36,6 @@ function initBoard() {
       BOARD[i].push(addTile()); // I just put "J + 1 * j" to get a wider range of number. temporary different numbers until i make the insert random tile function complete
     }
   }
-  updateHTML();
 }
 
 function getMoveFromUser() {
