@@ -1,5 +1,6 @@
 let BOARD = [];
 const DIMENSION = 4; // 4x4 board
+let gameStat = true;
 
 const MOVES = {
   // Tzarich Iyun
@@ -9,16 +10,24 @@ const MOVES = {
   LEFT: "left",
 };
 
+// If there are no possible moves - gameStat = false. Ends game
+/*    if(gameStat === false){
+        displayScore();
+        dont allow anymore user input (although this is unneccasary because the unserinput wont work as there are no more possible moves);
+      }
+*/
+
 initBoard();
 updateHTML();
 // Main Game Logic - Where we call the functions
-const userInput = getMoveFromUser();
-if (userInput) {
-  // Ensure valid input was provided
-  userMove(userInput); // Use the validated input
-  updateHTML(); // Update the UI
-} // This block was written with  the help of chatGPT ^w^  ...sorry, couldnt help myself.
-
+while (gameStat === true) {
+  const userInput = getMoveFromUser();
+  if (userInput) {
+    // Ensure valid input was provided
+    userMove(userInput); // Use the validated input
+    updateHTML(); // Update the UI
+  }
+}
 //-----------------Functions from here and down-----------------
 
 /**
