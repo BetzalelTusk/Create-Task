@@ -27,7 +27,7 @@ if (userInput) {
   userMove(userInput); // Use the validated input
   updateHTML(); // Update the UI
 }
-//}
+//} --Make sure to uncomment when ready for while loop--
 //-----------------Functions from here and down-----------------
 
 /**
