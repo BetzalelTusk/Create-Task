@@ -1,6 +1,7 @@
 let BOARD = [];
 const DIMENSION = 4; // 4x4 board
 let gameStat = true;
+let score;
 
 const MOVES = {
   // Tzarich Iyun
@@ -131,7 +132,7 @@ function zeroSwap(i, j, userInput) {
 
 function merge(i, j, userInput) {
   //we must convert up and down to right and left, because at the end of the day up and down are just right and left but transposed.
-  if (userInput === MOVES.RIGHT) {
+  if (userInput === MOVES.RIGHT && j === j - 1) {
     // j + 1 will = j * 2, and j becomes 0. Don't forget to move this zero to the left after the merge occurs.
   } else if (userInput === MOVES.LEFT) {
     // j - 1 will = j * 2, and j becomes 0. Don't forget to move this zero to the right after the merge occurs.
