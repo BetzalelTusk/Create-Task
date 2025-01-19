@@ -161,3 +161,13 @@ function addTile() {
 function transpose(BOARD) {
   return BOARD[0].map((_, colIndex) => BOARD.map((row) => row[colIndex]));
 }
+
+
+function merge(i, j) {
+        // Check if the next cell is the same and not already merged
+        if (j + 1 < grid[i].length && grid[i][j] === grid[i][j + 1] && grid[i][j] !== 0) {
+                grid[i][j + 1] = grid[i][j] + grid[i][j]; // Merge the values
+                grid[i][j] = 0; // Clear the original cell
+                zeroSwap(i, j); // Ensure the tiles are in the correct positions after merging
+        }
+}
