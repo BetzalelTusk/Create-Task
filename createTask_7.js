@@ -18,16 +18,13 @@ const MOVES = {
       }
 */
 
-initBoard();
-updateHTML();
 // Main Game Logic - Where we call the functions
 //while (gameStat === true) {
-const userInput = getMoveFromUser();
-if (userInput) {
-  // Ensure valid input was provided
-  userMove(userInput); // Use the validated input
-  updateHTML(); // Update the UI
-}
+//const userInput = getMoveFromUser();
+//if (userInput) {
+// Ensure valid input was provided
+//  userMove(userInput); // Use the validated input
+//}
 //}
 //-----------------Functions from here and down-----------------
 
@@ -36,16 +33,23 @@ if (userInput) {
  * It is not being used anywhere at the moment.
  */
 function initBoard() {
-  for (let i = 0; i < DIMENSION; i++) {
-    if (BOARD[i] !== undefined) {
-      BOARD[i] = [];
+  for (let y = 0; y < DIMENSION; y++) {
+    if (BOARD[y] !== undefined) {
+      BOARD[y] = [];
     } else {
       BOARD.push([]); // Into the 2nd dimension!!
     }
-    for (let j = 0; j < DIMENSION; j++) {
-      BOARD[i].push(addTile()); // I just put "J + 1 * j" to get a wider range of number. temporary different numbers until i make the insert random tile function complete
+    for (let x = 0; x < DIMENSION; x++) {
+      BOARD[y].push(Math.floor(Math.random() * DIMENSION));
     }
   }
+  // This is where we are going to push the new random tiles
+  let rnpY = Math.floor(Math.random() * DIMENSION); // random num placement
+  let rnpX = Math.floor(Math.random() * DIMENSION); // random num placement
+  if (BOARD[rnpX][rnpY] !== 0) {
+    BOARD[rnpX][rnpY] = Math.floor(Math.random() * DIMENSION);
+  }
+  updateHTML();
 }
 
 function getMoveFromUser() {
