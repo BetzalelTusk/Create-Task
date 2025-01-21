@@ -56,18 +56,22 @@ let userInput = 0;
 function buttonClickR() {
   userInput = 1;
   console.log(userInput);
+  updateHTML();
 }
 function buttonClickL() {
   userInput = 2;
   console.log(userInput);
+  updateHTML();
 }
 function buttonClickD() {
   userInput = 3;
   console.log(userInput);
+  updateHTML();
 }
 function buttonClickU() {
   userInput = 4;
   console.log(userInput);
+  updateHTML();
 }
 
 function userMove(userInput) {
