@@ -33,64 +33,63 @@ const MOVES = {
  * It is not being used anywhere at the moment.
  */
 function initBoard() {
-  for (let y = 0; y < DIMENSION; y++) {
-    if (BOARD[y] !== undefined) {
-      BOARD[y] = [];
+  for (let i = 0; i < DIMENSION; i++) {
+    if (BOARD[i] !== undefined) {
+      BOARD[i] = [];
     } else {
       BOARD.push([]); // Into the 2nd dimension!!
     }
-    for (let x = 0; x < DIMENSION; x++) {
-      BOARD[y].push(Math.floor(Math.random() * DIMENSION));
+    for (let j = 0; j < DIMENSION; j++) {
+      BOARD[i].push(Math.floor(Math.random() * DIMENSION));
     }
   }
   // This is where we are going to push the new random tiles
-  let rnpY = Math.floor(Math.random() * DIMENSION); // random num placement
+  /*let rnpY = Math.floor(Math.random() * DIMENSION); // random num placement
   let rnpX = Math.floor(Math.random() * DIMENSION); // random num placement
   if (BOARD[rnpX][rnpY] !== 0) {
     BOARD[rnpX][rnpY] = Math.floor(Math.random() * DIMENSION);
-  }
+  }*/
   updateHTML();
 }
 
-function getMoveFromUser() {
-  try {
-    const userInput = prompt(
-      "Which direction would you like to go in? right, left, up, or down?",
-    );
-    if (userInput === null || userInput.trim() === "") {
-      throw new Error("YOU MUST INPUT CORRECTLY OR DIE");
-    }
-
-    const possibleMoves = Object.values(MOVES); // Valid moves: up, down, left, right
-
-    if (!possibleMoves.includes(userInput)) {
-      throw new Error("YOU MUST CHOOSE BETTER OR DIE");
-    }
-
-    return userInput; // Return validated input
-  } catch (error) {
-    document.getElementById("error").textContent = error.message;
-    return null; // Return null if there's an error
-  }
+let userInput = 0;
+function buttonClickR() {
+  userInput = 1;
+  console.log(userInput);
+}
+function buttonClickL() {
+  userInput = 2;
+  console.log(userInput);
+}
+function buttonClickD() {
+  userInput = 3;
+  console.log(userInput);
+}
+function buttonClickU() {
+  userInput = 4;
+  console.log(userInput);
 }
 
 function userMove(userInput) {
   for (let i = 0; i < DIMENSION; i++) {
     // To filter through each row - BOARD[i](with an eventual[j])
-    if (userInput === MOVES.RIGHT) {
+    if (userInput == 1) {
+      //right
       for (let j = DIMENSION - 1; j >= 0; j--) {
         for (let k = 0; k < 4; k++) {
           zeroSwap(i, j, userInput);
         }
       }
-    } else if (userInput === MOVES.LEFT) {
+    } else if (userInput == 2) {
+      //left
       for (let j = 0; j < DIMENSION; j++) {
         // Start from leftmost non-edge cell
         for (let k = 0; k < 4; k++) {
           zeroSwap(i, j, userInput);
         }
       }
-    } else if (userInput === MOVES.DOWN) {
+    } else if (userInput == 3) {
+      //down
       // Introduce the transpose function and apply right logic
       BOARD = transpose(BOARD);
       for (let j = DIMENSION - 1; j >= 0; j--) {
@@ -99,7 +98,8 @@ function userMove(userInput) {
         }
       }
       BOARD = transpose(BOARD);
-    } else if (userInput === MOVES.UP) {
+    } else if (userInput == 4) {
+      //up
       // Introduce the transpose function and apply left logic
       BOARD = transpose(BOARD);
       for (let j = 0; j < DIMENSION; j++) {
@@ -111,6 +111,7 @@ function userMove(userInput) {
       BOARD = transpose(BOARD);
     }
   }
+  updateHTML();
 }
 
 //  ---------->> Fix bug that requires "K" loop above <<----------
