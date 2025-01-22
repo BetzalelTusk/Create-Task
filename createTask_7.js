@@ -38,6 +38,7 @@ function initBoard() {
     for (let j = 0; j < DIMENSION; j++) {
       BOARD[i].push(Math.floor(Math.random() * DIMENSION));
     }
+    score = 0;
   }
   // This is where we are going to push the new random tiles
   /*let rnpY = Math.floor(Math.random() * DIMENSION); // random num placement
@@ -50,12 +51,14 @@ function initBoard() {
 
 let userInput = 0;
 function buttonClickR() {
+  //RIGHT
   userInput = MOVES.RIGHT;
   for (let i = 0; i < DIMENSION; i++) {
     for (let j = DIMENSION - 1; j >= 0; j--) {
       for (let k = 0; k < 4; k++) {
         zeroSwap(i, j, userInput);
       }
+      merge(i, j);
     }
   }
   console.log(userInput);
@@ -63,18 +66,21 @@ function buttonClickR() {
   updateHTML();
 }
 function buttonClickL() {
+  //LEFT
   userInput = MOVES.LEFT;
   for (let i = 0; i < DIMENSION; i++) {
     for (let j = 0; j < DIMENSION; j++) {
       for (let k = 0; k < 4; k++) {
         zeroSwap(i, j, userInput);
       }
+      merge(i, j);
     }
   }
   console.log(userInput);
   updateHTML();
 }
 function buttonClickD() {
+  //DOWN
   userInput = MOVES.DOWN;
   for (let i = 0; i < DIMENSION; i++) {
     BOARD = transpose(BOARD);
@@ -82,6 +88,7 @@ function buttonClickD() {
       for (let k = 0; k < 4; k++) {
         zeroSwap(i, j, userInput);
       }
+      merge(i, j);
     }
     BOARD = transpose(BOARD);
   }
@@ -89,6 +96,7 @@ function buttonClickD() {
   updateHTML();
 }
 function buttonClickU() {
+  //UP
   userInput = MOVES.UP;
   for (let i = 0; i < DIMENSION; i++) {
     BOARD = transpose(BOARD);
@@ -96,6 +104,7 @@ function buttonClickU() {
       for (let k = 0; k < 4; k++) {
         zeroSwap(i, j, userInput);
       }
+      merge(i, j);
     }
     BOARD = transpose(BOARD);
   }
@@ -157,6 +166,7 @@ function zeroSwap(i, j, userInput) {
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
       j++;
     }
+    merge(i, j);
   } else if (userInput === MOVES.LEFT || userInput === MOVES.UP) {
     //As it is the same brains for left and up, we make the condition for this statement either left or up
     // Move non-zero value to the left as long as there's a zero to its left
@@ -165,6 +175,7 @@ function zeroSwap(i, j, userInput) {
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
       j++;
     }
+    merge(i, j);
   }
 }
 
@@ -200,5 +211,11 @@ function merge(i, j) {
     BOARD[i][j + 1] = BOARD[i][j] + BOARD[i][j]; // Merge the values
     BOARD[i][j] = 0; // Clear the original cell
     zeroSwap(i, j); // Ensure the tiles are in the correct positions after merging
+    score = score + BOARD[i][j] + BOARD[i][j];
   }
 }
+
+
+/* NOTES ---->
+* Remove errors that revolve around user input
+* 
