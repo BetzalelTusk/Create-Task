@@ -1,7 +1,7 @@
 let BOARD = [];
 const DIMENSION = 4; // 4x4 board
 let gameStat = true;
-let score;
+let score = 0;
 
 const MOVES = {
   // Tzarich Iyun
@@ -50,33 +50,61 @@ function initBoard() {
 
 let userInput = 0;
 function buttonClickR() {
-  userInput = 1;
-  userMove(userInput);
+  userInput = MOVES.RIGHT;
+  for (let i = 0; i < DIMENSION; i++) {
+    for (let j = DIMENSION - 1; j >= 0; j--) {
+      for (let k = 0; k < 4; k++) {
+        zeroSwap(i, j, userInput);
+      }
+    }
+  }
   console.log(userInput);
+  console.log(BOARD);
   updateHTML();
 }
 function buttonClickL() {
-  userInput = 2;
-  userMove(userInput);
+  userInput = MOVES.LEFT;
+  for (let i = 0; i < DIMENSION; i++) {
+    for (let j = 0; j < DIMENSION; j++) {
+      for (let k = 0; k < 4; k++) {
+        zeroSwap(i, j, userInput);
+      }
+    }
+  }
   console.log(userInput);
   updateHTML();
 }
 function buttonClickD() {
-  userInput = 3;
-  userMove(userInput);
+  userInput = MOVES.DOWN;
+  for (let i = 0; i < DIMENSION; i++) {
+    BOARD = transpose(BOARD);
+    for (let j = DIMENSION - 1; j >= 0; j--) {
+      for (let k = 0; k < 4; k++) {
+        zeroSwap(i, j, userInput);
+      }
+    }
+    BOARD = transpose(BOARD);
+  }
   console.log(userInput);
   updateHTML();
 }
 function buttonClickU() {
-  userInput = 4;
-  userMove(userInput);
+  userInput = MOVES.UP;
+  for (let i = 0; i < DIMENSION; i++) {
+    BOARD = transpose(BOARD);
+    for (let j = 0; j < DIMENSION; j++) {
+      for (let k = 0; k < 4; k++) {
+        zeroSwap(i, j, userInput);
+      }
+    }
+    BOARD = transpose(BOARD);
+  }
   console.log(userInput);
   updateHTML();
 }
 
-function userMove(userInput) {
+/*function userMove(userInput) {
   for (let i = 0; i < DIMENSION; i++) {
-    // To filter through each row - BOARD[i](with an eventual[j])
     if (userInput == 1) {
       //right
       for (let j = DIMENSION - 1; j >= 0; j--) {
@@ -117,6 +145,7 @@ function userMove(userInput) {
   }
   updateHTML();
 }
+*/
 
 //  ---------->> Fix bug that requires "K" loop above <<----------
 // -- dont call program finished until figure out what the bug is --
@@ -139,20 +168,8 @@ function zeroSwap(i, j, userInput) {
   }
 }
 
-function merge(i, j, userInput) {
-  //we must convert up and down to right and left, because at the end of the day up and down are just right and left but transposed.
-  if (userInput === MOVES.RIGHT && j === j - 1) {
-    // j + 1 will = j * 2, and j becomes 0. Don't forget to move this zero to the left after the merge occurs.
-  } else if (userInput === MOVES.LEFT) {
-    // j - 1 will = j * 2, and j becomes 0. Don't forget to move this zero to the right after the merge occurs.
-  } else if (userInput === MOVES.UP) {
-    //uses MOVES.LEFT logic + -- DO NOT -- transpose before and after merge as we alerady transpose in userMove() function
-  } else if (userInput === MOVES.DOWN) {
-    //uses MOVES.RIGHT logic + -- DO NOT -- transpose before and after merge as we alerady transpose in userMove() function
-  }
-}
-
 function updateHTML() {
+  document.getElementById("score").innerHTML = score;
   document.getElementById("row_0").innerHTML = BOARD[0];
   document.getElementById("row_1").innerHTML = BOARD[1];
   document.getElementById("row_2").innerHTML = BOARD[2];
@@ -176,12 +193,12 @@ function transpose(BOARD) {
 function merge(i, j) {
   // Check if the next cell is the same and not already merged
   if (
-    j + 1 < grid[i].length &&
-    grid[i][j] === grid[i][j + 1] &&
-    grid[i][j] !== 0
+    j + 1 < BOARD[i].length &&
+    BOARD[i][j] === BOARD[i][j + 1] &&
+    BOARD[i][j] !== 0
   ) {
-    grid[i][j + 1] = grid[i][j] + grid[i][j]; // Merge the values
-    grid[i][j] = 0; // Clear the original cell
+    BOARD[i][j + 1] = BOARD[i][j] + BOARD[i][j]; // Merge the values
+    BOARD[i][j] = 0; // Clear the original cell
     zeroSwap(i, j); // Ensure the tiles are in the correct positions after merging
   }
 }
