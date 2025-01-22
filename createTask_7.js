@@ -215,7 +215,8 @@ function merge(i, j) {
   }
 }
 
-
-/* NOTES ---->
-* Remove errors that revolve around user input
-* 
+/* NOTES ----> 
+ - Remove errors that revolve around user input
+ - Fix scoring mech
+ - Impliment randTile into init, and after every move
+*/
