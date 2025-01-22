@@ -55,21 +55,25 @@ function initBoard() {
 let userInput = 0;
 function buttonClickR() {
   userInput = 1;
+  userMove(userInput);
   console.log(userInput);
   updateHTML();
 }
 function buttonClickL() {
   userInput = 2;
+  userMove(userInput);
   console.log(userInput);
   updateHTML();
 }
 function buttonClickD() {
   userInput = 3;
+  userMove(userInput);
   console.log(userInput);
   updateHTML();
 }
 function buttonClickU() {
   userInput = 4;
+  userMove(userInput);
   console.log(userInput);
   updateHTML();
 }
