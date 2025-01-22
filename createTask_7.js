@@ -20,11 +20,7 @@ const MOVES = {
 
 // Main Game Logic - Where we call the functions
 //while (gameStat === true) {
-//const userInput = getMoveFromUser();
-//if (userInput) {
-// Ensure valid input was provided
-//  userMove(userInput); // Use the validated input
-//}
+
 //}
 //-----------------Functions from here and down-----------------
 
@@ -174,4 +170,18 @@ function addTile() {
 
 function transpose(BOARD) {
   return BOARD[0].map((_, colIndex) => BOARD.map((row) => row[colIndex]));
+}
+
+// Pulled from createTask_3.js
+function merge(i, j) {
+  // Check if the next cell is the same and not already merged
+  if (
+    j + 1 < grid[i].length &&
+    grid[i][j] === grid[i][j + 1] &&
+    grid[i][j] !== 0
+  ) {
+    grid[i][j + 1] = grid[i][j] + grid[i][j]; // Merge the values
+    grid[i][j] = 0; // Clear the original cell
+    zeroSwap(i, j); // Ensure the tiles are in the correct positions after merging
+  }
 }
