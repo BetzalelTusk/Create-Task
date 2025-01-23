@@ -194,6 +194,8 @@ function merge(i, j) {
  --------------------------------------------------------------------
 
  - For random tile, we can make a list of the locations of all the 0's and chose from that list randomly. - with the help of chatGPT:
+ - ISSUES: it seems that the randomTile is only being inserted when the cordinates are a zero, which is what we want, but the random 
+   cordinates should constantly be a selection from the emptySpots[] list. 
  ---------------------------------->>>>>
  */
 
@@ -217,4 +219,5 @@ function insertRandomTile(BOARD) {
   const randomIndex = Math.floor(Math.random() * emptySpots.length);
   const [randomRow, randomCol] = emptySpots[randomIndex];
   BOARD[emptySpots[randomIndex]] = randomInsert;
+  updateHTML();
 }
