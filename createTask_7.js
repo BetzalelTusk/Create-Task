@@ -63,6 +63,7 @@ function buttonClickR() {
   }
   console.log(userInput);
   console.log(BOARD);
+  insertRandomTile(BOARD);
   updateHTML();
 }
 function buttonClickL() {
@@ -111,50 +112,6 @@ function buttonClickU() {
   console.log(userInput);
   updateHTML();
 }
-
-/*function userMove(userInput) {
-  for (let i = 0; i < DIMENSION; i++) {
-    if (userInput == 1) {
-      //right
-      for (let j = DIMENSION - 1; j >= 0; j--) {
-        for (let k = 0; k < 4; k++) {
-          zeroSwap(i, j, userInput);
-        }
-      }
-    } else if (userInput == 2) {
-      //left
-      for (let j = 0; j < DIMENSION; j++) {
-        // Start from leftmost non-edge cell
-        for (let k = 0; k < 4; k++) {
-          zeroSwap(i, j, userInput);
-        }
-      }
-    } else if (userInput == 3) {
-      //down
-      // Introduce the transpose function and apply right logic
-      BOARD = transpose(BOARD);
-      for (let j = DIMENSION - 1; j >= 0; j--) {
-        for (let k = 0; k < 4; k++) {
-          zeroSwap(i, j, userInput);
-        }
-      }
-      BOARD = transpose(BOARD);
-    } else if (userInput == 4) {
-      //up
-      // Introduce the transpose function and apply left logic
-      BOARD = transpose(BOARD);
-      for (let j = 0; j < DIMENSION; j++) {
-        // Start from leftmost non-edge cell
-        for (let k = 0; k < 4; k++) {
-          zeroSwap(i, j, userInput);
-        }
-      }
-      BOARD = transpose(BOARD);
-    }
-  }
-  updateHTML();
-}
-*/
 
 //  ---------->> Fix bug that requires "K" loop above <<----------
 // -- dont call program finished until figure out what the bug is --
@@ -235,26 +192,29 @@ function merge(i, j) {
  --------------------------------------------------------------------
           BIG BRAIN MOOOOOVEEEE (ISNERT COW) MOOOOOOOOO
  --------------------------------------------------------------------
- 
+
  - For random tile, we can make a list of the locations of all the 0's and chose from that list randomly. - with the help of chatGPT:
-    function insertRandomTile(board) {
-      // Find all empty spots (indices where the value is 0)
-      const emptySpots = [];
-      for (let row = 0; row < board.length; row++) {
-        for (let col = 0; col < board[row].length; col++) {
-          if (board[row][col] === 0) {
-            emptySpots.push([row, col]);
-          }
-        }
-      }
+ ---------------------------------->>>>>
+ */
 
-      // If no empty spots, do nothing
-      if (emptySpots.length === 0) {
-        return;
+function insertRandomTile(BOARD) {
+  // Find all empty spots (indices where the value is 0)
+  const emptySpots = [];
+  for (let row = 0; row < DIMENSION; row++) {
+    for (let col = 0; col < DIMENSION; col++) {
+      if (BOARD[row][col] === 0) {
+        emptySpots.push([row, col]);
       }
-
+    }
+  }
+  // --------------------------------------------------------
+  // If no empty spots, do nothing
+  if (emptySpots.length === 0) {
+    return;
+  }
+  // Where we select which of these 0's locations we will swap with a 2/4
+  let randomInsert = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
   const randomIndex = Math.floor(Math.random() * emptySpots.length);
   const [randomRow, randomCol] = emptySpots[randomIndex];
-
-
-*/
+  BOARD[emptySpots[randomIndex]] = randomInsert;
+}
