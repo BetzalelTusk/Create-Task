@@ -188,7 +188,11 @@ function updateHTML() {
 }
 
 function addTile() {
-  let randomInsert = Math.floor(Math.random() * 2); // we need to make sure that this number is only a 2 or 4
+  let randomInsert = Math.floor(Math.random() * 3); // we need to make sure that this number is only a 2 or 4
+  while (randomInsert == 0) {
+    //Prevents random number from resulting in 0
+    randomInsert = Math.floor(Math.random() * 3);
+  }
   console.log(randomInsert);
   let randomLocation = Math.floor(Math.random() * DIMENSION);
   // we have this new let to determine where the "randomInsert" is going to go.
