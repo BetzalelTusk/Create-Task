@@ -193,12 +193,19 @@ function addTile() {
     //Prevents random number from resulting in 0
     randomInsert = Math.floor(Math.random() * 3) * 2;
   }
-  console.log(randomInsert);
-  let randomLocation = Math.floor(Math.random() * DIMENSION);
-  // we have this new let to determine where the "randomInsert" is going to go.
-  //keep in mind that the location that were will be putting the "randomInsert" in MUST be a 0, as a 0 is a placeholder.
-  //will work on the location part of the function later.
-  return randomInsert;
+  console.log(randomInsert + " :Insert");
+
+  // Keep in mind that the location that were will be putting the "randomInsert" in MUST be a 0, as a 0 is a placeholder.
+
+  let randomLocation_X = Math.floor(Math.random() * DIMENSION);
+  let randomLocation_Y = Math.floor(Math.random() * DIMENSION);
+  console.log(randomLocation_X + " :Locatio_X");
+  console.log(randomLocation_Y + " :Location_Y");
+
+  if (BOARD[randomLocation_Y][randomLocation_X] == 0) {
+    BOARD[randomLocation_Y][randomLocation_X] = randomInsert;
+    updateHTML();
+  }
 }
 
 function transpose(BOARD) {
@@ -224,4 +231,30 @@ function merge(i, j) {
  - Remove errors that revolve around user input
  - Fix scoring mech
  - Impliment randTile into init, and after every move
+
+ --------------------------------------------------------------------
+          BIG BRAIN MOOOOOVEEEE (ISNERT COW) MOOOOOOOOO
+ --------------------------------------------------------------------
+ 
+ - For random tile, we can make a list of the locations of all the 0's and chose from that list randomly. - with the help of chatGPT:
+    function insertRandomTile(board) {
+      // Find all empty spots (indices where the value is 0)
+      const emptySpots = [];
+      for (let row = 0; row < board.length; row++) {
+        for (let col = 0; col < board[row].length; col++) {
+          if (board[row][col] === 0) {
+            emptySpots.push([row, col]);
+          }
+        }
+      }
+
+      // If no empty spots, do nothing
+      if (emptySpots.length === 0) {
+        return;
+      }
+
+  const randomIndex = Math.floor(Math.random() * emptySpots.length);
+  const [randomRow, randomCol] = emptySpots[randomIndex];
+
+
 */
