@@ -41,7 +41,8 @@ function initBoard() {
     score = 0;
   }
   // This is where we are going to push the new random tiles
-  insertRandomTile(BOARD);
+  addTile(); // NOTE - We need to make sure that the two random tiles we add are not going to be in the same location. Maybe make a list of all the cordinates and subtract the cordinates each time we add a tile?
+  addTile();
   updateHTML();
 }
 
@@ -141,6 +142,19 @@ function updateHTML() {
 }
 
 function addTile() {
+  const emptySpots = [];
+  for (let row = 0; row < DIMENSION; row++) {
+    for (let col = 0; col < DIMENSION; col++) {
+      if (BOARD[row][col] === 0) {
+        emptySpots.push([row, col]);
+      }
+    }
+  }
+  // If no empty spots, do nothing
+  if (emptySpots.length === 0) {
+    return;
+  }
+
   let randomInsert = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
   while (randomInsert === 0) {
     //Prevents random number from resulting in 0
@@ -157,8 +171,13 @@ function addTile() {
 
   if (BOARD[randomLocation_Y][randomLocation_X] == 0) {
     BOARD[randomLocation_Y][randomLocation_X] = randomInsert;
-    updateHTML();
   }
+
+  let randomNum = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
+  const randomIndex = Math.floor(Math.random() * emptySpots.length);
+  const [randomRow, randomCol] = emptySpots[randomIndex];
+  BOARD[emptySpots[randomIndex]] = randomNum;
+  updateHTML();
 }
 
 function transpose(BOARD) {
