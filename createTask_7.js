@@ -36,16 +36,12 @@ function initBoard() {
       BOARD.push([]); // Into the 2nd dimension!!
     }
     for (let j = 0; j < DIMENSION; j++) {
-      BOARD[i].push(Math.floor(Math.random() * DIMENSION));
+      BOARD[i].push(0);
     }
     score = 0;
   }
   // This is where we are going to push the new random tiles
-  /*let rnpY = Math.floor(Math.random() * DIMENSION); // random num placement
-  let rnpX = Math.floor(Math.random() * DIMENSION); // random num placement
-  if (BOARD[rnpX][rnpY] !== 0) {
-    BOARD[rnpX][rnpY] = Math.floor(Math.random() * DIMENSION);
-  }*/
+  insertRandomTile(BOARD);
   updateHTML();
 }
 
@@ -188,7 +184,6 @@ function merge(i, j) {
  - Remove errors that revolve around user input
  - Fix scoring mech
  - Impliment randTile into init, and after every move
-
  --------------------------------------------------------------------
           BIG BRAIN MOOOOOVEEEE (ISNERT COW) MOOOOOOOOO
  --------------------------------------------------------------------
@@ -215,9 +210,9 @@ function insertRandomTile(BOARD) {
     return;
   }
   // Where we select which of these 0's locations we will swap with a 2/4
-  let randomInsert = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
+  let randomNum = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
   const randomIndex = Math.floor(Math.random() * emptySpots.length);
   const [randomRow, randomCol] = emptySpots[randomIndex];
-  BOARD[emptySpots[randomIndex]] = randomInsert;
+  BOARD[emptySpots[randomIndex]] = randomNum;
   updateHTML();
 }
