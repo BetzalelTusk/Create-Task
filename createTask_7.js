@@ -41,6 +41,7 @@ function initBoard() {
     score = 0;
   }
   // This is where we are going to push the new random tiles
+  insertRandomTile(BOARD);
   updateHTML();
 }
 
@@ -73,7 +74,6 @@ function buttonClickL() {
     }
   }
   console.log(userInput);
-  console.log(BOARD);
   updateHTML();
 }
 function buttonClickD() {
@@ -90,7 +90,6 @@ function buttonClickD() {
     BOARD = transpose(BOARD);
   }
   console.log(userInput);
-  console.log(BOARD);
   updateHTML();
 }
 function buttonClickU() {
@@ -107,7 +106,6 @@ function buttonClickU() {
     BOARD = transpose(BOARD);
   }
   console.log(userInput);
-  console.log(BOARD);
   updateHTML();
 }
 
@@ -143,27 +141,24 @@ function updateHTML() {
 }
 
 function addTile() {
+  let randomInsert = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
+  while (randomInsert === 0) {
+    //Prevents random number from resulting in 0
+    randomInsert = Math.floor(Math.random() * 3) * 2;
+  }
+  console.log(randomInsert + " :Insert");
+
   // Keep in mind that the location that were will be putting the "randomInsert" in MUST be a 0, as a 0 is a placeholder.
 
-  const emptySpots = [];
-  for (let row = 0; row < DIMENSION; row++) {
-    for (let col = 0; col < DIMENSION; col++) {
-      if (BOARD[row][col] === 0) {
-        emptySpots.push([row, col]);
-      }
-    }
-  }
+  let randomLocation_X = Math.floor(Math.random() * DIMENSION);
+  let randomLocation_Y = Math.floor(Math.random() * DIMENSION);
+  console.log(randomLocation_X + " :Locatio_X");
+  console.log(randomLocation_Y + " :Location_Y");
 
-  let randomInsert = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
-  while (randomInsert == 0) {
-    // Makes sure that the randomNum isn't a zero ^
+  if (BOARD[randomLocation_Y][randomLocation_X] == 0) {
+    BOARD[randomLocation_Y][randomLocation_X] = randomInsert;
+    updateHTML();
   }
-  let randomNum = Math.floor(Math.random() * 3) * 2; // we need to make sure that this number is only a 2 or 4
-  const randomIndex = Math.floor(Math.random() * emptySpots.length);
-  const [randomRow, randomCol] = emptySpots[randomIndex];
-  BOARD[emptySpots[randomIndex]] = randomNum;
-
-  updateHTML();
 }
 
 function transpose(BOARD) {
