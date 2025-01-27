@@ -75,6 +75,7 @@ function buttonClickL() {
     }
   }
   console.log(userInput);
+  console.log(BOARD);
   updateHTML();
 }
 function buttonClickD() {
@@ -91,6 +92,7 @@ function buttonClickD() {
     BOARD = transpose(BOARD);
   }
   console.log(userInput);
+  console.log(BOARD);
   updateHTML();
 }
 function buttonClickU() {
@@ -107,6 +109,7 @@ function buttonClickU() {
     BOARD = transpose(BOARD);
   }
   console.log(userInput);
+  console.log(BOARD);
   updateHTML();
 }
 
