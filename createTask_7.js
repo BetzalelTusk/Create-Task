@@ -1,5 +1,5 @@
 let BOARD = [];
-const DIMENSION = 4; // 4x4 board
+const DIMENSION = 10; // 4x4 board
 let gameStat = true;
 let score = 0;
 
