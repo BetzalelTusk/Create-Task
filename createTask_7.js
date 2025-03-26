@@ -29,6 +29,19 @@ const MOVES = {
  * It is not being used anywhere at the moment.
  */
 function initBoard() {
+  // remove all "row" class elements
+  const rows = document.getElementsByClassName("row");
+  while (rows.length > 0) {
+    rows[0].parentNode.removeChild(rows[0]);
+  }
+  // add `DIMENSION` rows to the '#board' element
+  for (let i = 0; i < DIMENSION; i++) {
+    const row = document.createElement("div");
+    row.className = "row";
+    row.id = "row_" + i;
+    document.getElementById("board").appendChild(row);
+  }
+
   for (let i = 0; i < DIMENSION; i++) {
     if (BOARD[i] !== undefined) {
       BOARD[i] = [];
@@ -138,10 +151,9 @@ function zeroSwap(i, j, userInput) {
 
 function updateHTML() {
   document.getElementById("score").innerHTML = score;
-  document.getElementById("row_0").innerHTML = BOARD[0];
-  document.getElementById("row_1").innerHTML = BOARD[1];
-  document.getElementById("row_2").innerHTML = BOARD[2];
-  document.getElementById("row_3").innerHTML = BOARD[3];
+  for (let i = 0; i < DIMENSION; i++) {
+    document.getElementById("row_" + i).innerHTML = BOARD[i];
+  }
 }
 
 function addTile() {
@@ -202,7 +214,7 @@ function merge(i, j) {
   }
 }
 
-/* NOTES ----> 
+/* NOTES ---->
  - Remove errors that revolve around user input
  - Fix scoring mech
  - Impliment randTile into init, and after every move
@@ -211,8 +223,8 @@ function merge(i, j) {
  --------------------------------------------------------------------
 
  - For random tile, we can make a list of the locations of all the 0's and chose from that list randomly. - with the help of chatGPT:
- - ISSUES: it seems that the randomTile is only being inserted when the cordinates are a zero, which is what we want, but the random 
-   cordinates should constantly be a selection from the emptySpots[] list. 
+ - ISSUES: it seems that the randomTile is only being inserted when the cordinates are a zero, which is what we want, but the random
+   cordinates should constantly be a selection from the emptySpots[] list.
  ---------------------------------->>>>>
  */
 
