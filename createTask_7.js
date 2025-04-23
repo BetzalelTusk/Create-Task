@@ -59,7 +59,7 @@ function initBoard() {
   updateHTML();
 }
 
-let userInput = 0;
+let userInput;
 function buttonClickR() {
   //RIGHT
   userInput = MOVES.RIGHT;
@@ -73,7 +73,7 @@ function buttonClickR() {
   }
   console.log(userInput);
   console.log(BOARD);
-  insertRandomTile(BOARD);
+  addTile();
   updateHTML();
 }
 function buttonClickL() {
@@ -89,6 +89,7 @@ function buttonClickL() {
   }
   console.log(userInput);
   console.log(BOARD);
+  addTile();
   updateHTML();
 }
 function buttonClickD() {
@@ -106,6 +107,7 @@ function buttonClickD() {
   }
   console.log(userInput);
   console.log(BOARD);
+  addTile();
   updateHTML();
 }
 function buttonClickU() {
@@ -123,6 +125,7 @@ function buttonClickU() {
   }
   console.log(userInput);
   console.log(BOARD);
+  addTile();
   updateHTML();
 }
 
@@ -131,6 +134,7 @@ function buttonClickU() {
 
 function zeroSwap(i, j, userInput) {
   if (userInput === MOVES.RIGHT || userInput === MOVES.DOWN) {
+    // Meaning a right merge
     // Move non-zero value to the right as long as there's a zero to its right
     while (j + 1 < DIMENSION && BOARD[i][j + 1] === 0) {
       [BOARD[i][j], BOARD[i][j + 1]] = [BOARD[i][j + 1], BOARD[i][j]];
@@ -138,7 +142,8 @@ function zeroSwap(i, j, userInput) {
     }
     merge(i, j);
   } else if (userInput === MOVES.LEFT || userInput === MOVES.UP) {
-    //As it is the same brains for left and up, we make the condition for this statement either left or up
+    // Meaning a left merge
+    // As it is the same brains for left and up, we make the condition for this statement either left or up
     // Move non-zero value to the left as long as there's a zero to its left
     while (j < DIMENSION - 1 && BOARD[i][j] === 0) {
       //Make sure to look over this while statement. i dont think its the right logic.
