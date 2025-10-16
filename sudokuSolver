@@ -1,0 +1,39 @@
+let BOARD = [];
+const DIMENSION = 4;
+let gameStat = true;
+let score = 0;
+
+const MOVES = {
+  UP: "up",
+  DOWN: "down",
+  RIGHT: "right",
+  LEFT: "left",
+};
+
+function initBoard() {
+  const rows = document.getElementsByClassName("row");
+  while (rows.length > 0) {
+    rows[0].parentNode.removeChild(rows[0]);
+  }
+  for (let i = 0; i < DIMENSION; i++) {
+    const row = document.createElement("div");
+    row.className = "row";
+    row.id = "row_" + i;
+    document.getElementById("board").appendChild(row);
+  }
+
+  for (let i = 0; i < DIMENSION; i++) {
+    if (BOARD[i] !== undefined) {
+      BOARD[i] = [];
+    } else {
+      BOARD.push([]);
+    }
+    for (let j = 0; j < DIMENSION; j++) {
+      BOARD[i].push(0);
+    }
+    score = 0;
+  }
+  addTile();
+  addTile();
+  updateHTML();
+}
