@@ -180,6 +180,7 @@ function merge(i, j) {
     BOARD[i][j] = 0;
     zeroSwap(i, j);
     score = score + BOARD[i][j] + BOARD[i][j];
+    console.log(score);
   }
 }
 
