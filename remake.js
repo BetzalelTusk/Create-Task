@@ -10,7 +10,7 @@ function initBoard() {
         }
         BOARD.push(row)
     }
-    console.log(BOARD)
+    //console.log(BOARD)
 }
 
 // Function to add a tile to the board on initiation
@@ -25,16 +25,19 @@ function addTile() {
             }
         }
     }
-    //console.log(emptySpots)
-    let randomNum = Math.floor(Math.random() * 4) + 1;
-    console.log(randomNum);
+    console.log(emptySpots)
+    let randomIndex = Math.floor(Math.random() * emptySpots.length)
+    BOARD[emptySpots[randomIndex][0]][emptySpots[randomIndex][1]] = Math.floor(Math.random() * 2 + 1) * 2;
+    return BOARD
 }
 
 // Random Tile Funtion
-function randomTile() {
-    const randomNum = Math.floor
+function randomTile(maxRange) {
+    let randomNum = Math.floor(Math.random() * maxRange + 1) * 2;
+    //console.log(randomNum)
+    return randomNum
 }
 
 // Function executions
 initBoard()
-addTile()
+console.log(addTile())
